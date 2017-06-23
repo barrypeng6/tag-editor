@@ -6,13 +6,6 @@ let style = {
     padding: '2px',
     width: '50px',
   },
-  dropAreaOriginal: {
-    backgroundColor: 'rgba(165, 42,42, 0.3)',
-    width: '30px',
-    height: '20px',
-    position: 'absolute',
-    zIndex: 10
-  },
   tagHover: {
     backgroundColor: 'skyblue',
     opacity: '0.4',
@@ -26,12 +19,10 @@ let style = {
     padding: '2px',
     width: '50px',
     marginRight: '4px',
-    zIndex: 11
   },
-  dropAreaEntered: {
+  tagEntered: {
     backgroundColor: 'red',
     border: '2px dashed #000',
-    paddingRight: '60px'
   },
   input: {
     backgroundColor: 'transparent',
@@ -48,8 +39,7 @@ class TagContainer extends Component {
     this.state = {
       value: '',
       editable: false,
-      tagState: style.tagOriginal,
-      dropAreaState: style.dropAreaOriginal
+      tagState: style.tagOriginal
     }
   }
 
@@ -84,17 +74,18 @@ class TagContainer extends Component {
   }
 
   handleDragStart(e) {
-    console.log('drag');
+    console.log('drag', );
     this.setState({
       tagState: style.tagIsDraging
     });
     e.dataTransfer.setData('text', this.props.id);
+    console.log(e.clientX, e.clientY);
   }
 
   handleDragEnter(e) {
     console.log('drag enter');
     this.setState({
-      dropAreaState: style.dropAreaEntered
+      tagState: style.tagEntered
     });
   }
 
@@ -108,7 +99,7 @@ class TagContainer extends Component {
   handleDragLeave(e) {
     console.log('drag leave');
     this.setState({
-      dropAreaState: style.dropAreaOriginal
+      tagState: style.tagOriginal
     });
   }
 
@@ -118,7 +109,7 @@ class TagContainer extends Component {
       e.stopPropagation();
     }
     this.setState({
-      dropAreaState: style.dropAreaOriginal
+      tagState: style.tagOriginal
     });
     this.props.handleChange(e.dataTransfer.getData('text'), this.props.id)
     return false;
@@ -147,17 +138,17 @@ class TagContainer extends Component {
     return (
       <span>
         <span
-          style={this.state.dropAreaState}
+          style={this.state.tagState}
+          draggable={true}
+          onDrag={(e) => {
+            console.log(e.clientX, e.clientY);
+          }}
+          onDragStart={(e)=> this.handleDragStart(e)}
+          onDragEnd={(e) => this.handleDragEnd(e)}
           onDragEnter={(e) => this.handleDragEnter(e)}
           onDragOver={(e) => this.handleDragOver(e)}
           onDragLeave={(e) => this.handleDragLeave(e)}
-          onDrop={(e) => this.handleDrop(e)}>
-        </span>
-        <span
-          style={this.state.tagState}
-          draggable={true}
-          onDragStart={(e)=> this.handleDragStart(e)}
-          onDragEnd={(e) => this.handleDragEnd(e)}
+          onDrop={(e) => this.handleDrop(e)}
           onMouseEnter={(e) => this.handleMouseEnter(e)}
           onMouseLeave={(e) => this.handleMouseLeave(e)}
           onClick={this.handleClick.bind(this)}>

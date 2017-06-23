@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TagEditor from './tag-editor';
+import SortableComponent from './test'
 
 const oData = ['apple', 'orange', 'kkk'];
 
@@ -7,14 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: []
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
       data: oData
-    });
+    }
   }
 
   handleEnter(newData) {
@@ -51,6 +46,12 @@ class App extends Component {
     return (
       <div>
         <TagEditor
+          data={this.state.data}
+          handleEnter={this.handleEnter.bind(this)}
+          handleChange={this.handleChange.bind(this)}
+          handleAddTag={this.handleAddTag.bind(this)}
+        />
+        <SortableComponent
           data={this.state.data}
           handleEnter={this.handleEnter.bind(this)}
           handleChange={this.handleChange.bind(this)}
