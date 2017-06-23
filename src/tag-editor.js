@@ -3,8 +3,10 @@ import TagContainer from './tag-container';
 
 
 const style = {
-  border: 'solid',
-  padding: '4px'
+  frame: {
+    border: 'solid',
+    padding: '4px',
+  }
 };
 
 
@@ -13,7 +15,7 @@ class TagEditor extends Component {
     super();
     this.handleEnter = this.handleEnter.bind(this);
     this.state = {
-      showAddTag: true
+      showAddTag: true,
     }
   }
 
@@ -36,7 +38,7 @@ class TagEditor extends Component {
     let { data } = this.props;
     return (
       /* 輸入外框 */
-      <div style={style}>
+      <div style={style.frame}>
         {data.map((d, key) => {
           return (
             <TagContainer

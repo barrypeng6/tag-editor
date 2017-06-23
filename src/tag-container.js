@@ -7,7 +7,11 @@ let style = {
     width: '50px',
   },
   dropAreaOriginal: {
-    color: 'white'
+    backgroundColor: 'rgba(165, 42,42, 0.3)',
+    width: '30px',
+    height: '20px',
+    position: 'absolute',
+    zIndex: 10
   },
   tagHover: {
     backgroundColor: 'skyblue',
@@ -22,6 +26,7 @@ let style = {
     padding: '2px',
     width: '50px',
     marginRight: '4px',
+    zIndex: 11
   },
   dropAreaEntered: {
     backgroundColor: 'red',
@@ -39,7 +44,7 @@ let style = {
 
 class TagContainer extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       value: '',
       editable: false,
@@ -147,7 +152,6 @@ class TagContainer extends Component {
           onDragOver={(e) => this.handleDragOver(e)}
           onDragLeave={(e) => this.handleDragLeave(e)}
           onDrop={(e) => this.handleDrop(e)}>
-          _
         </span>
         <span
           style={this.state.tagState}
