@@ -11,7 +11,7 @@ const style = {
     height: 0,
     borderLeft: '4px solid transparent',
     borderRight: '4px solid transparent',
-    borderTop: '4px solid #000'
+    borderTop: '4px solid skyblue'
   }
 }
 
@@ -100,8 +100,13 @@ class Item extends Component {
                 isEditHover: false
               });
             }}
-            onClick={(e)=>handleEditTag(this.props.value)}
-          >{'edit'}</div>
+            onClick={(e)=>{
+              handleEditTag(this.props.value)
+              this.setState({
+                editable: true
+              });
+            }}
+          >{'編輯'}</div>
           <div
             style={isDelHover ? itemStyle.option.buttonHover : itemStyle.option.button}
             onMouseEnter={(e) => {
@@ -114,8 +119,11 @@ class Item extends Component {
                 isDelHover: false
               });
             }}
-            onClick={(e)=>{handleDeleteTag(this.props.value)}}
-          >{'delete'}</div>
+            onClick={(e)=>{
+              handleDeleteTag(this.props.value)
+              this.props.handleEnter('', this.props.id);
+            }}
+          >{'刪除'}</div>
         </div> : null}
       </div>
     );

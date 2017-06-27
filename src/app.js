@@ -6,12 +6,13 @@ const oData = ['apple', 'orange', 'kkk'];
 
 const itemStyle = {
   tagContainer: {
-    margin: '5px',
+    margin: '6px',
     padding: '0px 8px',
-    backgroundColor: 'skyblue',
+    backgroundColor: 'white',
+    border: '1px solid skyblue',
     borderRadius: '100px',
-    boxShadow: '1px 1px 3px 0px grey',
-    cursor: 'move'
+    cursor: 'move',
+    color: 'skyblue'
   },
   option: {
     position: 'absolute',
@@ -20,7 +21,7 @@ const itemStyle = {
     right: '15px',
     marginLeft: '15px',
     padding: '5px',
-    boxShadow: '3px 3px 4px 0px grey',
+    border: '1px solid lightgray',
     borderRadius: '5px',
     button: {
       cursor: 'pointer'
@@ -50,6 +51,7 @@ class App extends Component {
 
   handleEnter(newData) {
     // create new tag complete
+    console.log(newData);
     this.setState({
       data: newData
     });
